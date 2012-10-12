@@ -30,7 +30,7 @@
 var State = module.exports = function(firefly, defaults, serviceName) {
     this._firefly = firefly;
     
-    var mongoose = app.get('Mongoose');
+    var mongoose = firefly.get('Mongoose');
     
     this._stateModel = mongoose.model('State');
     

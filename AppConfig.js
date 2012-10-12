@@ -36,6 +36,12 @@ var Config = module.exports = {
 
     */
     AUTO_START_WS_SERVER: true,
+    
+    /*
+        Number of nodes. set 0 to use number of CPU cores
+     
+    */
+    NODE_COUNT: 0,
 
     MongoDB: {
         HOST: 'localhost',

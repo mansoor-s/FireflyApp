@@ -18,6 +18,8 @@ var Site = module.exports = function( app ) {
 
 
 Site.prototype.homeAction = function( req, res ) {
+	console.log('in here!');
+	console.log(process.pid);
     var session = req.getSession();
     
     var basePath = req.getBasePath().substring(1);

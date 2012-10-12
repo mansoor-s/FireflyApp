@@ -26,7 +26,7 @@ var AppConfig       = require( './AppConfig.js' );
 var routes          = require( './Routes.js' );
 
 var HandleBars      = require( './services/Renderer/Handlebars.js' );
-var Redis           = require( './services/Database/Reids.js' );
+var Redis           = require( './services/Database/Redis.js' );
 var SessionManager  = require( './services/Security/SessionManager.js' );
 var Permission      = require( './services/Security/Permission.js' );
 var Mongoose        = require( './services/Database/Mongoose.js' );
@@ -51,7 +51,7 @@ var permission = new Permission(app);
 
 var mongoose = new Mongoose(app);
 
-var state = new State(app);
+//var state = new State(app);
 
 
 if (cluster.isMaster) {

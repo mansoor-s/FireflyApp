@@ -1,0 +1,28 @@
+{ 
+    "name": "firefly",
+    "description": "A Node.js CMS",
+    "version": "0.0.1",
+    "url": "https://github.com/mansoor-s/Firefly",
+    "author": "Mansoor Sayed <mansoor@mansoorsayed.com>",
+    "engines": ["node >= 0.8.7"],
+    "main": "index.js",
+    "dependencies": {
+        "useragent": "latest",
+        "ws": "latest",
+        "formidable": "latest",
+        "async": "latest",
+        "nodemailer": "latest",
+        "bcrypt": "latest",
+        "handlebars": "latest",
+        "mongoose": "latest",
+        "dive": "latest",
+        "node-uuid": "latest",
+        "redis": "latest",
+        "winston": "latest"
+    },
+    "repository": {
+        "type" : "git",
+        "url" : "git@github.com:mansoor-s/Firefly.git"
+    }
+}
+
