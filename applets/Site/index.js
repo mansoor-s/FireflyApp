@@ -5,13 +5,13 @@ var async = require('async');
 
 var Site = module.exports = function( app ) {
 	this._app = app;
-        this._mongoose = app.get('Mongoose');
-        this._sessionManager = app.get('SessionManager');
-        
-        this._userModel = this._mongoose.model('User');
-        this._documentModel = this._mongoose.model('Document');
-        
-        this._appState = app.get('State');
+	this._mongoose = app.get('Mongoose');
+	this._sessionManager = app.get('SessionManager');
+	
+	this._userModel = this._mongoose.model('User');
+	this._documentModel = this._mongoose.model('Document');
+	
+	this._appState = app.get('State');
 };
 
 
@@ -21,6 +21,8 @@ Site.prototype.homeAction = function( req, res ) {
 	console.log('in here!');
 	console.log(process.pid);
     var session = req.getSession();
+	
+	var appState = req.getAppState();
     
     var basePath = req.getBasePath().substring(1);
     

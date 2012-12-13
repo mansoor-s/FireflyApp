@@ -27,7 +27,7 @@
 * @param {Object} firefly reference to the application Firefly object
 * @param {Object} defaults 
 */
-var State = module.exports = function(firefly, defaults, serviceName) {
+var StateManager = module.exports = function(firefly, defaults, serviceName) {
     this._firefly = firefly;
     
     var mongoose = firefly.get('Mongoose');
@@ -36,13 +36,15 @@ var State = module.exports = function(firefly, defaults, serviceName) {
     
     firefly.router.addRouteRequirement('state', this._getStateInjecter());
     
+    firefly.set('StateManager', this);
+    
     this._state = undefined;
     
     Object.seal(this);
 };
 
 
-State.prototype._onInit = function() {
+StateManager.prototype._onInit = function() {
     var self = this;
     return function(fn) {
         self._stateModel.findOne({}, function(err, state) {
@@ -57,30 +59,38 @@ State.prototype._onInit = function() {
                         throw err;
                     }
                     
-                    self._firefly.set('State', state);    
                     fn();
                 });
+            }else {
+                fn();
             }
         });
     };
 };
 
 
-State.prototype._getStateInjecter = function() {
+StateManager.prototype._getStateInjecter = function() {
     var self = this;
     return function(request, response, rule, fn) {
         if (rule === true) {
-            request.state = this;
+            request.setAppState(self);
             fn(true);
+        } else {
+            fn(false);
         }
     };
 };
 
-State.prototype.get = function() {
-    return this._state;
+StateManager.prototype.get = function( fn ) {
+    return this._state[prop];
 };
 
 
-State.prototype.persist = function() {
+StateManager.prototype.persist = function( fn ) {
+    
+};
+
+
+StateManager.prototype.update = function( fn ) {
     
 };

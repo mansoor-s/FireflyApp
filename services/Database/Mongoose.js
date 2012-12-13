@@ -63,8 +63,11 @@ var Mongoose = module.exports = function(firefly, serviceName) {
 Mongoose.prototype._onInit = function() {
     var self = this;
     return function(fn) {
-        self.db.open(self.opts.HOST, self.opts.DB_NAME, self.opts.PORT, self.opts.OPTS, function() {
-            console.log('Connected to MongoDB');
+        self.db.open(self.opts.HOST, self.opts.DB_NAME, self.opts.PORT, self.opts.OPTS, function(err) {
+            if (err) {
+                throw Error('Unable to connect to MongoDB server with error: `' + err + '`');
+            }
+            
 
             //initialize models
             self._initModels(fn);
