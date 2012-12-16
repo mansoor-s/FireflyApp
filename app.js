@@ -21,17 +21,17 @@
 var cluster         = require( 'cluster' );
 var numCPUs         = require('os').cpus().length;
 
-var Firefly         = require( '../Firefly/' );
+var Firefly         = require( 'firefly' );
 var AppConfig       = require( './AppConfig.js' );
 var routes          = require( './Routes.js' );
 
-var HandleBars      = require( './services/Renderer/Handlebars.js' );
-var Redis           = require( './services/Database/Redis.js' );
-var SessionManager  = require( './services/Security/SessionManager.js' );
-var Permission      = require( './services/Security/Permission.js' );
-var Mongoose        = require( './services/Database/Mongoose.js' );
-var Mailer          = require( './services/Mailer/Mailer.js' );
-var State           = require( './services/State/State.js' );
+var HandleBars      = require( 'firefly-handlebars' );
+var Redis           = require( 'firefly-redis' );
+var SessionManager  = require( 'firefly-redis-session' );
+var Permission      = require( 'firefly-permission' );
+var Mongoose        = require( '../firefly-mongoose/firefly-mongoose.js' );
+var Mailer          = require( 'firefly-mailer' );
+//var State           = require( './services/State/State.js' );
 
 
 //new instance of Firefly
@@ -54,23 +54,7 @@ var mongoose = new Mongoose(app);
 //var state = new State(app);
 
 
-if (cluster.isMaster) {
-    // Fork workers.
-    for (var i = 0; i < numCPUs; i++) {
-        var worker = cluster.fork();
-        worker.on('message', function(msg) {
-            console.log(msg);
-        });
-    }
-
-    cluster.on('death', function(worker) {
-        console.log('worker ' + worker.pid + ' died');
-        cluster.fork();
-    });
-    
-} else {
-    //Initialize 
-    app.init(function() {
-        process.send('Server Started');  
-    });
-}
+//Initialize 
+app.init(function() {
+    console.log('Server Started');  
+});
